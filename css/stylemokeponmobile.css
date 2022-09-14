@@ -74,6 +74,7 @@
 
 #mensajeFinal{
     width: 350px;
+    font-size: 17px;
 }
 
 #imagen-fuego, #imagen-agua, #imagen-tierra {

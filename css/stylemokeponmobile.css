@@ -22,6 +22,7 @@
 
   .cuadro2{
     width:290px;
+    margin: 4px;
   }
 
   .botones-ataque{
@@ -69,4 +70,17 @@
   margin-bottom: -9px;
   font-size: 12px;
   width: 92px;
+}
+
+#mensajeFinal{
+    width: 350px;
+}
+
+#imagen-fuego, #imagen-agua, #imagen-tierra {
+    height: 16.5px;
+    margin-top: 0.8px;
+}
+
+#img-ataque-jugador, #img-ataque-enemigo {
+    margin-top: 12.5px;
 }

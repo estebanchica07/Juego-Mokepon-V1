@@ -75,11 +75,12 @@
 #mensajeFinal{
     width: 350px;
     font-size: 17px;
+    margin: 4px auto 0px;
 }
 
 #imagen-fuego, #imagen-agua, #imagen-tierra {
     height: 16.5px;
-    margin-top: 0.8px;
+    margin-top: 0.7px;
 }
 
 #img-ataque-jugador, #img-ataque-enemigo {
@@ -90,4 +91,17 @@
     height: 55px;
     width: 55px;
     margin-top: 45px;
+}
+
+.vidas {
+    margin:15px;
+    height: 50px;
+    padding-top: 3px;
+    font-size: 15px;
+    width: 40px;
+}
+
+#vidas-jugador, #vidas-enemigo {
+    font-size: 50px;
+    margin-top: -5px;
 }

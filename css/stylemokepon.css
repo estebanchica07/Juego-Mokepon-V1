@@ -357,10 +357,11 @@ p.mostrar-mascota{
   margin-top: -20px
 }
 
-@media (max-width: 440px){
+/*@media (max-width: 440px){
   .elegir-mascota{
     flex-direction: column;
   }
+
   .botones-ataque{
     display: flex;
     flex-direction: column;
@@ -379,7 +380,7 @@ p.mostrar-mascota{
     flex-direction: column;
   }*/
 
-  .cuadro2{
+  /*.cuadro2{
     width:290px;
   }
 
@@ -430,3 +431,4 @@ p.mostrar-mascota{
   width: 92px;
 }
 
+}*/

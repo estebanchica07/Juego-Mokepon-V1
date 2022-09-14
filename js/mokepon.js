@@ -111,9 +111,9 @@ function iniciarJuego() {
     divResultado.style.display = "none"
 
     mokepones.forEach((Mokepon) => {
-        opcionDeMokepones = `<Label class="tarjeta-de-mokepon" for="${Mokepon.nombre}">
-        <input type="radio" name="mascota" id="${Mokepon.nombre}" />"${Mokepon.nombre}"
-        <img src="${Mokepon.imagen}" alt="${Mokepon.nombre}">
+        opcionDeMokepones = `<Label class="tarjeta-de-mokepon" for=${Mokepon.nombre}>
+        <input type="radio" name="mascota" id=${Mokepon.nombre} />${Mokepon.nombre}
+        <img src=${Mokepon.imagen} alt=${Mokepon.nombre}>
         </Label>
         `
         contenedorTarjetas.innerHTML += opcionDeMokepones

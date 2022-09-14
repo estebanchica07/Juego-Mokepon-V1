@@ -90,7 +90,8 @@
 #versus{
     height: 55px;
     width: 55px;
-    margin-top: 45px;
+    margin-top: 47px;
+    font-size: 25px;
 }
 
 .vidas {
@@ -98,7 +99,7 @@
     height: 50px;
     padding-top: 3px;
     font-size: 15px;
-    width: 40px;
+    width: 38px;
 }
 
 #vidas-jugador, #vidas-enemigo {

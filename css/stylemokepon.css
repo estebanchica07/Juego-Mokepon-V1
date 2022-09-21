@@ -79,7 +79,7 @@ h2{
   cursor:pointer;/*Para poner la manito del click*/
 }
 
-.tarjeta-de-mokepon img, #img-pydos, #img-ratigueya, #img-langostelvis, #img-tucapalma, #img-hipodoge, #img-capipepo{
+.tarjeta-de-mokepon img, .imagen-selected{
   
   margin-top: 20px;
   height:160px;
@@ -169,6 +169,7 @@ h2{
 
 .botones-ataque{
   margin-top: 20px;
+  
 }
 
 .boton-ataque img{
@@ -294,11 +295,12 @@ h2{
   padding:0px;
 }
 
-#imagen-fuego, #imagen-agua, #imagen-tierra{
+.img-ataque{
   height: 28px;
   display:flex;
   align-items: center;
-  margin-top:2px
+  margin-top:2px;
+  padding: 12px;
 }
 
 #vidas-jugador, #vidas-enemigo{

@@ -14,15 +14,18 @@ const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
 
 const spanMascotaJugador = document.getElementById('mascota-jugador')
 const spanImagenJugador = document.getElementById('imagen-jugador')
-let selected
+let selectedId
+let imagenSelected
 const spanMascotaEnemigo = document.getElementById("mascota-enemigo")
 const spanImagenEnemigo = document.getElementById("imagen-enemigo")
 let selectedenemy
+let imagenSelectedEne
 
 const spanVidasJugador = document.getElementById("vidas-jugador")
 const spanVidasEnemigo = document.getElementById("vidas-enemigo")
 
 const contenedorTarjetas = document.getElementById("contenedorTarjetas")
+const contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = []
 let ataqueJugador 
@@ -34,6 +37,8 @@ let inputRatigueya
 let inputLangostelvis
 let inputTucapalma
 let inputPydos
+let mascotaJugador
+let ataquesMokepon
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -54,35 +59,35 @@ let Tucapalma = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg"
 let Pydos = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5)
 
 Hipodoge.ataques.push(
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 Capipepo.ataques.push(
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
 )
 
 Ratigueya.ataques.push(
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 Langostelvis.ataques.push(
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 Tucapalma.ataques.push(
@@ -94,11 +99,11 @@ Tucapalma.ataques.push(
 )
 
 Pydos.ataques.push(
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 mokepones.push(Hipodoge,Capipepo,Ratigueya,Langostelvis,Tucapalma,Pydos)
@@ -110,10 +115,10 @@ function iniciarJuego() {
     sectionSeleccionarAtaque.style.display = "none"
     divResultado.style.display = "none"
 
-    mokepones.forEach((Mokepon) => {
-        opcionDeMokepones = `<Label class="tarjeta-de-mokepon" for=${Mokepon.nombre}>
-        <input type="radio" name="mascota" id=${Mokepon.nombre} />${Mokepon.nombre}
-        <img src=${Mokepon.imagen} alt=${Mokepon.nombre}>
+    mokepones.forEach((mokepon) => {
+        opcionDeMokepones = `<Label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
+        <input type="radio" name="mascota" id=${mokepon.nombre} data-img="${mokepon.imagen}" />${mokepon.nombre}
+        <img src=${mokepon.imagen} alt=${mokepon.nombre}>
         </Label>
         `
         contenedorTarjetas.innerHTML += opcionDeMokepones
@@ -138,98 +143,101 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
 
     if(inputHipodoge.checked) {
-        selected = "Hipodoge"
-        spanImagenJugador.innerHTML = '<img id="img-hipodoge" src="./imagenes/pokemon-17.svg" alt="Hipodoge">'
+        selectedId = inputHipodoge.id
+        imagenSelected = inputHipodoge.dataset.img
 
     } else if(inputCapipepo.checked) {
-        selected = "Capipepo"
-        spanImagenJugador.innerHTML = '<img id="img-capipepo" src="./imagenes/pidgeot-seeklogo.com.svg" alt="Hipodoge">'
+        selectedId = inputCapipepo.id
+        imagenSelected = inputCapipepo.dataset.img
         
     } else if(inputRatigueya.checked) {
-        selected = "Ratigueya"
-        spanImagenJugador.innerHTML = '<img id="img-ratigueya" src="./imagenes/pokemon-5.svg" alt="Hipodoge">'
+        selectedId = inputRatigueya.id
+        imagenSelected = inputRatigueya.dataset.img
 
     } else if(inputLangostelvis.checked) {
-        selected = "Langostelvis"
-        spanImagenJugador.innerHTML = '<img id="img-langostelvis" src="./imagenes/charizard-logo-C9856A6142-seeklogo.com.png" alt="Hipodoge">'
+        selectedId = inputLangostelvis.id
+        imagenSelected = inputLangostelvis.dataset.img
 
     } else if(inputTucapalma.checked) {
-        selected = "Tucapalma"
-        spanImagenJugador.innerHTML = '<img id="img-tucapalma" src="./imagenes/butterfree-seeklogo.com.svg" alt="Hipodoge">'
+        selectedId = inputTucapalma.id
+        imagenSelected = inputTucapalma.dataset.img
 
     } else if(inputPydos.checked) {
-        selected = "Pydos"
-        spanImagenJugador.innerHTML = '<img id="img-pydos" src="./imagenes/dragonair-logo-D994877077-seeklogo.com.png" alt="Hipodoge">'
+        selectedId = inputPydos.id
+        imagenSelected = inputPydos.dataset.img
 
     } else {
         alert("Debes seleccionar un MOKEPON")
         location.reload()
     }
 
-    if (selected) {
-        spanMascotaJugador.innerHTML = selected 
+    if (selectedId) {
+        spanMascotaJugador.innerHTML = selectedId 
+        spanImagenJugador.innerHTML = `<img class="imagen-selected" src="${imagenSelected}" alt="${selectedId}">`
     } 
 
     sectionSeleccionarAtaque.style.display = "flex"
     sectionSeleccionarMascota.style.display = "none"
 
+    extraerAtaques(selectedId)
     seleccionarMascotaEnemigo()
 
     document.querySelector(".cuadro2").scrollIntoView({behavior:"smooth"});
     
 }
 
-function seleccionarMascotaEnemigo(){
-    let ataqueAleatorio = aleatorio(1,6)
-
-    if(ataqueAleatorio == 1) {
-        selectedenemy = "Hipodoge"
-        spanImagenEnemigo.innerHTML = '<img id="img-hipodoge" src="./imagenes/pokemon-17.svg" alt="Hipodoge">'
-
-    } else if(ataqueAleatorio == 2){
-        selectedenemy = "Capipepo"
-        spanImagenEnemigo.innerHTML = '<img id="img-capipepo" src="./imagenes/pidgeot-seeklogo.com.svg" alt="Hipodoge">'
-
-    } else if(ataqueAleatorio == 3){
-        selectedenemy = "Ratigueya"
-        spanImagenEnemigo.innerHTML = '<img id="img-ratigueya" src="./imagenes/pokemon-5.svg" alt="Hipodoge">'
-
-    } else if(ataqueAleatorio == 4){
-        selectedenemy = "Langostelvis"
-        spanImagenEnemigo.innerHTML = '<img id="img-langostelvis" src="./imagenes/charizard-logo-C9856A6142-seeklogo.com.png" alt="Hipodoge">'
-
-    } else if(ataqueAleatorio == 5){
-        selectedenemy = "Tucapalma"
-        spanImagenEnemigo.innerHTML = '<img id="img-tucapalma" src="./imagenes/butterfree-seeklogo.com.svg" alt="Hipodoge">'
-
-    } else {
-        selectedenemy = "Pydos"
-        spanImagenEnemigo.innerHTML = '<img id="img-pydos" src="./imagenes/dragonair-logo-D994877077-seeklogo.com.png" alt="Hipodoge">'
-    } 
-    
-    if (selectedenemy){
-        spanMascotaEnemigo.innerHTML = selectedenemy
+function extraerAtaques(selectedId){
+    let ataques
+    for (let i = 0; i < mokepones.length; i++) {
+        if (selectedId === mokepones[i].nombre) {
+        ataques = mokepones[i].ataques
+        }
     }
+    mostrarAtaques(ataques)
+    
 }
 
+function seleccionarMascotaEnemigo(){
+    let ataqueAleatorio = aleatorio(0, mokepones.length-1)
+    
+    spanMascotaEnemigo.innerHTML = mokepones[ataqueAleatorio].nombre
+    spanImagenEnemigo.innerHTML = `<img class="imagen-selected" src="${mokepones[ataqueAleatorio].imagen}" alt="${mokepones[ataqueAleatorio].nombre}">`  
+    
+}
+
+function mostrarAtaques(ataques){
+    ataques.forEach((ataque) => {
+
+    ataquesMokepon = `
+        <button id="${ataque.id}" class="boton-ataque">${ataque.nombre}
+        <img class="img-ataque" src="${ataque.img}"}>
+        </button>
+        `
+
+        contenedorAtaques.innerHTML += ataquesMokepon
+        
+    })
+    
+}
 function ataqueFuego(){
 
     ataqueJugador = "FUEGO"
     spanImagenAtaqueJugador = '<img id="imagen-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
     ataqueAleatorioEnemigo()
-}
+    }
 
-function ataqueAgua(){
+    function ataqueAgua(){
     ataqueJugador = "AGUA"
     spanImagenAtaqueJugador = '<img id="imagen-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
     ataqueAleatorioEnemigo()
-}
+    }
 
-function ataqueTierra(){
+    function ataqueTierra(){
     ataqueJugador = "TIERRA"
     spanImagenAtaqueJugador = '<img id="imagen-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
 
     ataqueAleatorioEnemigo()
+    
 }
 
 function ataqueAleatorioEnemigo(){
@@ -330,7 +338,7 @@ function reiniciarJuego(){
 }
 
 function aleatorio(min,max) {
-    return Math.floor(Math.random() * (max - min + 1)+ 1)
+    return Math.floor(Math.random() * (max - min + 1)+ min)
 }
 
 window.addEventListener('load', iniciarJuego)

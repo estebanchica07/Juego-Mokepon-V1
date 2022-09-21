@@ -4,7 +4,13 @@
 
   .botones-ataque{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-top: 10px;
   }
 
   .cuadro{
@@ -15,20 +21,19 @@
     width: 270px;
   }
 
-  /*.mascotas-elegidas{
-    display:flex;
-    flex-direction: column;
-  }*/
+  .mascotas-elegidas{
+    margin-top: 14px;
+  }
 
   .cuadro2{
     width:320px;
     margin: 4px;
+    padding: 12px;
   }
 
-  .botones-ataque{
-    display:flex;
-    flex-direction: row;
-    
+  .h2{
+    margin-top: 0px;
+    margin-bottom: 9px;
   }
 
   .boton-ataque img {
@@ -36,11 +41,12 @@
   }
   
   .boton-ataque{
-    width:110px;
-    height:115px;
+    width:90px;
+    height:100px;
     margin-right: 4px;
     margin-left: 4px;
-    font-size:20px;
+    font-size:18px;
+    margin-top: 5px;
   }
 
   .cuadro-mascota{
@@ -58,7 +64,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
-#img-pydos, #img-ratigueya, #img-langostelvis, #img-tucapalma, #img-hipodoge, #img-capipepo{
+.imagen-selected{
   
   margin-top: 20px;
   height:80px;
@@ -78,10 +84,10 @@
     margin: 4px auto 0px;
 }
 
-#imagen-fuego, #imagen-agua, #imagen-tierra {
+.img-ataque {
     height: 16.5px;
     margin-top: 0.7px;
-}
+    padding: 0px 7px 5px 8px;
 
 #img-ataque-jugador, #img-ataque-enemigo {
     margin-top: 12.5px;
@@ -106,3 +112,4 @@
     font-size: 50px;
     margin-top: -5px;
 }
+

@@ -361,9 +361,16 @@ function mensajeFinal(resultadoFinal){
     
     divMensajeFinal.appendChild(parrafo)
 
-    //botonFuego.disabled = true
-    //botonAgua.disabled = true
-    //botonTierra.disabled = true
+    // botones.forEach((boton) => {
+    //     boton.disabled = true 
+    // })
+
+    function deshabilitarBoton(btn) {
+        btn.disabled = true 
+    }
+
+    botones.forEach(deshabilitarBoton)
+
 
     sectionReiniciar.style.display = "block"
     divMensajeFinal.style.display = "flex"

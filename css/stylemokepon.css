@@ -177,7 +177,7 @@ h2{
   margin-top:6px;
 }
 
-.boton-ataque:hover{
+.boton-ataque:enabled:hover{
   background-color: white;
   color:black;
   border: 2px solid rgb(18, 18, 18);
@@ -186,9 +186,16 @@ h2{
 
 }
 
-.boton-ataque:active{
+.boton-ataque:enabled:active{
   background-color:#FFCC01;
 }
+
+.boton-ataque:disabled{
+  opacity: 40%;
+  cursor: not-allowed;
+
+}
+
 
 .mascotas-elegidas{
   display:flex;
@@ -290,6 +297,13 @@ h2{
 
 }
 
+#imagen-fuego, #imagen-agua, #imagen-tierra{
+  height: 28px;
+  display:flex;
+  align-items: center;
+  margin-top:2px
+}
+
 #img-ataque-jugador, #img-ataque-enemigo{
   margin-top:16px;
   padding:0px;
@@ -302,6 +316,7 @@ h2{
   margin-top:2px;
   padding: 12px;
 }
+
 
 #vidas-jugador, #vidas-enemigo{
   font-size:53px;

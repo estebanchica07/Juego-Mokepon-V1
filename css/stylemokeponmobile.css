@@ -84,10 +84,16 @@
     margin: 4px auto 0px;
 }
 
+#imagen-fuego, #imagen-agua, #imagen-tierra {
+  height: 16.5px;
+  margin-top: 0.7px;
+}
+
 .img-ataque {
     height: 16.5px;
     margin-top: 0.7px;
     padding: 0px 7px 5px 8px;
+}
 
 #img-ataque-jugador, #img-ataque-enemigo {
     margin-top: 12.5px;

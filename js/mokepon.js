@@ -5,9 +5,7 @@ const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
 const divResultado = document.getElementById("resultado")
 const divVersus = document.getElementById("versus")
 const botonMascotaJugador = document.getElementById('boton-mascota')
-const botonFuego = document.getElementById('boton-fuego')
-const botonAgua = document.getElementById('boton-agua')
-const botonTierra = document.getElementById('boton-tierra')
+
 const botonReiniciar = document.getElementById("boton-revancha")
 
 const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
@@ -28,7 +26,7 @@ const contenedorTarjetas = document.getElementById("contenedorTarjetas")
 const contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = []
-let ataqueJugador 
+let ataqueJugador = [] 
 let ataqueEnemigo
 let opcionDeMokepones
 let inputHipodoge
@@ -39,6 +37,10 @@ let inputTucapalma
 let inputPydos
 let mascotaJugador
 let ataquesMokepon
+let botonFuego
+let botonAgua
+let botonTierra
+let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -134,9 +136,7 @@ function iniciarJuego() {
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
-    botonFuego.addEventListener('click', ataqueFuego)
-    botonAgua.addEventListener('click', ataqueAgua)
-    botonTierra.addEventListener('click', ataqueTierra)
+    
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
@@ -197,19 +197,12 @@ function extraerAtaques(selectedId){
     
 }
 
-function seleccionarMascotaEnemigo(){
-    let ataqueAleatorio = aleatorio(0, mokepones.length-1)
-    
-    spanMascotaEnemigo.innerHTML = mokepones[ataqueAleatorio].nombre
-    spanImagenEnemigo.innerHTML = `<img class="imagen-selected" src="${mokepones[ataqueAleatorio].imagen}" alt="${mokepones[ataqueAleatorio].nombre}">`  
-    
-}
 
 function mostrarAtaques(ataques){
     ataques.forEach((ataque) => {
 
     ataquesMokepon = `
-        <button id="${ataque.id}" class="boton-ataque">${ataque.nombre}
+        <button data-id="${ataque.id}" class="boton-ataque BAtaque">${ataque.nombre}
         <img class="img-ataque" src="${ataque.img}"}>
         </button>
         `
@@ -218,30 +211,76 @@ function mostrarAtaques(ataques){
         
     })
     
+    botonFuego = document.getElementById('boton-fuego') 
+    botonAgua = document.getElementById('boton-agua')
+    botonTierra = document.getElementById('boton-tierra')
+
+    botones = document.querySelectorAll('.BAtaque')
+    
+    //botonFuego.addEventListener('click', ataqueFuego)
+    //botonAgua.addEventListener('click', ataqueAgua)
+    //botonTierra.addEventListener('click', ataqueTierra)
+
 }
+
+function atacar(e) {
+    const boton = e.currentTarget;
+
+    if (boton.dataset.id === 'boton-fuego') {
+        ataqueJugador.push('FUEGO')
+        console.log(ataqueJugador)
+        ataqueFuego()
+    } else if(boton.dataset.id === 'boton-agua') {
+        ataqueJugador.push('AGUA')
+        console.log(ataqueJugador)
+        ataqueAgua()
+    } else {
+        ataqueJugador.push('TIERRA')
+        console.log(ataqueJugador)
+        ataqueTierra()
+    }
+    //boton.style.background = '#3D3837'
+    boton.disabled = true
+    boton.removeEventListener('click', atacar)
+}
+
+function secuenciaAtaque() {
+
+    botones.forEach((boton) =>{
+        console.log(boton)
+        boton.addEventListener('click', atacar)
+    })  
+}
+
+function seleccionarMascotaEnemigo(){
+    let ataqueAleatorio = aleatorio(0, mokepones.length-1)
+    
+    
+    spanMascotaEnemigo.innerHTML = mokepones[ataqueAleatorio].nombre
+    spanImagenEnemigo.innerHTML = `<img class="imagen-selected" src="${mokepones[ataqueAleatorio].imagen}" alt="${mokepones[ataqueAleatorio].nombre}">`  
+    secuenciaAtaque()
+}
+
 function ataqueFuego(){
 
-    ataqueJugador = "FUEGO"
     spanImagenAtaqueJugador = '<img id="imagen-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
     ataqueAleatorioEnemigo()
     }
 
     function ataqueAgua(){
-    ataqueJugador = "AGUA"
     spanImagenAtaqueJugador = '<img id="imagen-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
     ataqueAleatorioEnemigo()
     }
 
     function ataqueTierra(){
-    ataqueJugador = "TIERRA"
     spanImagenAtaqueJugador = '<img id="imagen-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
-
     ataqueAleatorioEnemigo()
     
 }
 
 function ataqueAleatorioEnemigo(){
     ataqueAleatorio = aleatorio(1,3)
+    
 
     if (ataqueAleatorio == 1){
         ataqueEnemigo = "FUEGO"
@@ -322,9 +361,9 @@ function mensajeFinal(resultadoFinal){
     
     divMensajeFinal.appendChild(parrafo)
 
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonTierra.disabled = true
+    //botonFuego.disabled = true
+    //botonAgua.disabled = true
+    //botonTierra.disabled = true
 
     sectionReiniciar.style.display = "block"
     divMensajeFinal.style.display = "flex"

@@ -27,6 +27,7 @@ const contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = []
 let ataqueJugador = [] 
+let jugadaJugador
 let ataqueEnemigo
 let opcionDeMokepones
 let inputHipodoge
@@ -93,11 +94,11 @@ Langostelvis.ataques.push(
 )
 
 Tucapalma.ataques.push(
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '💦', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
 )
 
 Pydos.ataques.push(
@@ -264,16 +265,19 @@ function seleccionarMascotaEnemigo(){
 function ataqueFuego(){
 
     spanImagenAtaqueJugador = '<img id="imagen-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
+    jugadaJugador = "FUEGO"
     ataqueAleatorioEnemigo()
     }
 
     function ataqueAgua(){
     spanImagenAtaqueJugador = '<img id="imagen-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
+    jugadaJugador = "AGUA"
     ataqueAleatorioEnemigo()
     }
 
     function ataqueTierra(){
     spanImagenAtaqueJugador = '<img id="imagen-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
+    jugadaJugador = "TIERRA"
     ataqueAleatorioEnemigo()
     
 }
@@ -295,7 +299,7 @@ function ataqueAleatorioEnemigo(){
         ataqueEnemigo = "TIERRA"
         spanImagenAtaqueEnemigo = '<img id="imagen-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
     }
-
+    
     divResultado.style.display = "flex"
     divVersus.style.display = "none"
 
@@ -305,22 +309,22 @@ function ataqueAleatorioEnemigo(){
 
 function pelea(){
 
-    if(ataqueJugador == ataqueEnemigo){
+    if(jugadaJugador == ataqueEnemigo){
         crearMensaje("EMPATE")
 
-    } else if(ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA" || ataqueJugador == "AGUA" && ataqueEnemigo == "FUEGO" || ataqueJugador == "TIERRA" && ataqueEnemigo == "AGUA" ){
+    } else if(jugadaJugador == "FUEGO" && ataqueEnemigo == "TIERRA" || jugadaJugador == "AGUA" && ataqueEnemigo == "FUEGO" || jugadaJugador == "TIERRA" && ataqueEnemigo == "AGUA" ){
     crearMensaje("GANASTE") 
     vidasEnemigo = vidasEnemigo - 1
     spanVidasEnemigo.innerHTML = vidasEnemigo
 
-
+    
     } else {
         crearMensaje("PERDISTE") 
         
         vidasJugador = vidasJugador - 1 //Es lo mismo que vidasJugador-= 1 o vidasJugador--
         spanVidasJugador.innerHTML = vidasJugador
     }
-
+    
     document.querySelector("#resultado").scrollIntoView({behavior:"smooth"});
 
     revisarvidas()

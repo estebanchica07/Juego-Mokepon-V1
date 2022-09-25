@@ -297,7 +297,7 @@ h2{
 
 }
 
-#imagen-fuego, #imagen-agua, #imagen-tierra{
+#boton-fuego, #boton-agua, #boton-tierra{
   height: 28px;
   display:flex;
   align-items: center;

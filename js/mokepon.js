@@ -28,7 +28,9 @@ const contenedorAtaques = document.getElementById("contenedorAtaques")
 let mokepones = []
 let ataqueJugador = [] 
 let jugadaJugador
-let ataqueEnemigo
+let ataquesMokeponEnemigo = []
+let ataqueEnemigo = []
+let jugadaEnemigo
 let opcionDeMokepones
 let inputHipodoge
 let inputCapipepo
@@ -42,6 +44,8 @@ let botonFuego
 let botonAgua
 let botonTierra
 let botones = []
+let ataqueAleatorio
+let ataqueAleatorio1
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -229,77 +233,72 @@ function atacar(e) {
 
     if (boton.dataset.id === 'boton-fuego') {
         ataqueJugador.push('FUEGO')
+        jugadaJugador = "FUEGO"
         console.log(ataqueJugador)
-        ataqueFuego()
+        spanImagenAtaqueJugador = '<img id="boton-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
+        
+        
     } else if(boton.dataset.id === 'boton-agua') {
         ataqueJugador.push('AGUA')
         console.log(ataqueJugador)
-        ataqueAgua()
+        jugadaJugador = "AGUA"
+        spanImagenAtaqueJugador = '<img id="boton-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
+
     } else {
-        ataqueJugador.push('TIERRA')
+        ataqueJugador.push("TIERRA")
         console.log(ataqueJugador)
-        ataqueTierra()
+        jugadaJugador = "TIERRA"
+        spanImagenAtaqueJugador = '<img id="boton-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
+
     }
+    ataqueAleatorioEnemigo()
     //boton.style.background = '#3D3837'
     boton.disabled = true
     boton.removeEventListener('click', atacar)
 }
-
+    
 function secuenciaAtaque() {
 
     botones.forEach((boton) =>{
-        console.log(boton)
         boton.addEventListener('click', atacar)
     })  
 }
 
 function seleccionarMascotaEnemigo(){
-    let ataqueAleatorio = aleatorio(0, mokepones.length-1)
+    ataqueAleatorio = aleatorio(0, mokepones.length-1)
     
     
     spanMascotaEnemigo.innerHTML = mokepones[ataqueAleatorio].nombre
     spanImagenEnemigo.innerHTML = `<img class="imagen-selected" src="${mokepones[ataqueAleatorio].imagen}" alt="${mokepones[ataqueAleatorio].nombre}">`  
+    ataquesMokeponEnemigo = mokepones[ataqueAleatorio].ataques
     secuenciaAtaque()
-}
-
-function ataqueFuego(){
-
-    spanImagenAtaqueJugador = '<img id="imagen-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
-    jugadaJugador = "FUEGO"
-    ataqueAleatorioEnemigo()
-    }
-
-    function ataqueAgua(){
-    spanImagenAtaqueJugador = '<img id="imagen-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
-    jugadaJugador = "AGUA"
-    ataqueAleatorioEnemigo()
-    }
-
-    function ataqueTierra(){
-    spanImagenAtaqueJugador = '<img id="imagen-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
-    jugadaJugador = "TIERRA"
-    ataqueAleatorioEnemigo()
     
 }
-
+    
 function ataqueAleatorioEnemigo(){
-    ataqueAleatorio = aleatorio(1,3)
-    
+    ataqueAleatorio1 = aleatorio(0,ataquesMokeponEnemigo.length -1)
 
-    if (ataqueAleatorio == 1){
-        ataqueEnemigo = "FUEGO"
-        spanImagenAtaqueEnemigo = '<img id="imagen-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
+    if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Fuego"){
+        ataqueEnemigo.push("FUEGO")
+        jugadaEnemigo = "FUEGO"
+        spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">`
+    }
 
+    else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Agua"){
+        ataqueEnemigo.push("AGUA")
+        jugadaEnemigo = "AGUA"
+        spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">`
+    }
 
-    } else if (ataqueAleatorio == 2){
-        ataqueEnemigo = "AGUA"
-        spanImagenAtaqueEnemigo = '<img id="imagen-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
-
-    } else {
-        ataqueEnemigo = "TIERRA"
-        spanImagenAtaqueEnemigo = '<img id="imagen-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
+     else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Tierra") {
+        ataqueEnemigo.push("TIERRA")
+        jugadaEnemigo = "TIERRA"
+        spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>`
     }
     
+    console.log(ataqueEnemigo)
+    ataquesMokeponEnemigo.splice([ataqueAleatorio1],1)
+
     divResultado.style.display = "flex"
     divVersus.style.display = "none"
 
@@ -309,10 +308,10 @@ function ataqueAleatorioEnemigo(){
 
 function pelea(){
 
-    if(jugadaJugador == ataqueEnemigo){
+    if(jugadaJugador == jugadaEnemigo){
         crearMensaje("EMPATE")
 
-    } else if(jugadaJugador == "FUEGO" && ataqueEnemigo == "TIERRA" || jugadaJugador == "AGUA" && ataqueEnemigo == "FUEGO" || jugadaJugador == "TIERRA" && ataqueEnemigo == "AGUA" ){
+    } else if(jugadaJugador == "FUEGO" && jugadaEnemigo == "TIERRA" || jugadaJugador == "AGUA" && jugadaEnemigo == "FUEGO" || jugadaJugador == "TIERRA" && jugadaEnemigo == "AGUA" ){
     crearMensaje("GANASTE") 
     vidasEnemigo = vidasEnemigo - 1
     spanVidasEnemigo.innerHTML = vidasEnemigo
@@ -329,7 +328,7 @@ function pelea(){
 
     revisarvidas()
 }
-
+    
 function revisarvidas(){
     if (vidasEnemigo == 0){
         mensajeFinal('FELICITACIONES, ERES EL GANADOR')

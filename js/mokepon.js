@@ -1,6 +1,7 @@
 const divMensajeFinal = document.getElementById("mensajeFinal")
 const sectionReiniciar = document.getElementById("reiniciar")
 const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+const sectionEligeTuAtaque = document.getElementById("elige-tu-ataque")
 
 const divResultado = document.getElementById("resultado")
 const divVersus = document.getElementById("versus")
@@ -19,8 +20,8 @@ const spanImagenEnemigo = document.getElementById("imagen-enemigo")
 let selectedenemy
 let imagenSelectedEne
 
-const spanVidasJugador = document.getElementById("vidas-jugador")
-const spanVidasEnemigo = document.getElementById("vidas-enemigo")
+const spanVictoriasJugador = document.getElementById("vidas-jugador")
+const spanVictoriasEnemigo = document.getElementById("vidas-enemigo")
 
 const contenedorTarjetas = document.getElementById("contenedorTarjetas")
 const contenedorAtaques = document.getElementById("contenedorAtaques")
@@ -46,8 +47,11 @@ let botonTierra
 let botones = []
 let ataqueAleatorio
 let ataqueAleatorio1
-let vidasJugador = 3
-let vidasEnemigo = 3
+let indexAtaqueJugador
+let indexAtaqueEnemigo
+let victoriasJugador = 0
+let victoriasEnemigo = 0
+
 
 class Mokepon {
     constructor(nombre, imagen, vida) {
@@ -173,7 +177,7 @@ function seleccionarMascotaJugador() {
 
     } else {
         alert("Debes seleccionar un MOKEPON")
-        location.reload()
+        reload()
     }
 
     if (selectedId) {
@@ -222,24 +226,20 @@ function mostrarAtaques(ataques){
 
     botones = document.querySelectorAll('.BAtaque')
     
-    //botonFuego.addEventListener('click', ataqueFuego)
-    //botonAgua.addEventListener('click', ataqueAgua)
-    //botonTierra.addEventListener('click', ataqueTierra)
-
 }
 
 function atacar(e) {
     const boton = e.currentTarget;
 
     if (boton.dataset.id === 'boton-fuego') {
-        ataqueJugador.push('FUEGO')
+        ataqueJugador.push("FUEGO")
         jugadaJugador = "FUEGO"
         console.log(ataqueJugador)
         spanImagenAtaqueJugador = '<img id="boton-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
         
         
     } else if(boton.dataset.id === 'boton-agua') {
-        ataqueJugador.push('AGUA')
+        ataqueJugador.push("AGUA")
         console.log(ataqueJugador)
         jugadaJugador = "AGUA"
         spanImagenAtaqueJugador = '<img id="boton-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
@@ -302,27 +302,35 @@ function ataqueAleatorioEnemigo(){
     divResultado.style.display = "flex"
     divVersus.style.display = "none"
 
-    pelea() 
-
+    pelea()
 }
+
+function iniciarpelea() {
+       if (ataqueJugador.length === 5) {
+           pelea()
+       }
+    
+    }
 
 function pelea(){
 
-    if(jugadaJugador == jugadaEnemigo){
-        crearMensaje("EMPATE")
+        if(jugadaJugador === jugadaEnemigo) {
+            // indexAmbosOponentes(index, index)
+            crearMensaje("EMPATE")   
 
-    } else if(jugadaJugador == "FUEGO" && jugadaEnemigo == "TIERRA" || jugadaJugador == "AGUA" && jugadaEnemigo == "FUEGO" || jugadaJugador == "TIERRA" && jugadaEnemigo == "AGUA" ){
-    crearMensaje("GANASTE") 
-    vidasEnemigo = vidasEnemigo - 1
-    spanVidasEnemigo.innerHTML = vidasEnemigo
+        } else if(jugadaJugador === "FUEGO" && jugadaEnemigo === "TIERRA" || jugadaJugador === "AGUA" && jugadaEnemigo === "FUEGO" || jugadaJugador === "TIERRA" && jugadaEnemigo ==="AGUA" ){
+        crearMensaje("GANASTE") 
+        victoriasJugador++
+        //spanVidasEnemigo.innerHTML = vidasEnemigo
+        spanVictoriasJugador.innerHTML = victoriasJugador
 
-    
-    } else {
+
+        } else {
         crearMensaje("PERDISTE") 
         
-        vidasJugador = vidasJugador - 1 //Es lo mismo que vidasJugador-= 1 o vidasJugador--
-        spanVidasJugador.innerHTML = vidasJugador
-    }
+        victoriasEnemigo++ //Es lo mismo que vidasJugador-= 1 o vidasJugador--
+        spanVictoriasEnemigo.innerHTML = victoriasEnemigo
+        }
     
     document.querySelector("#resultado").scrollIntoView({behavior:"smooth"});
 
@@ -330,14 +338,26 @@ function pelea(){
 }
     
 function revisarvidas(){
-    if (vidasEnemigo == 0){
+
+    if(victoriasJugador === 3){
         mensajeFinal('FELICITACIONES, ERES EL GANADOR')
         
-    } else if (vidasJugador == 0){
+    } else if (victoriasEnemigo === 3) {
         mensajeFinal('PERDISTE, VUELTE A INTENTARLO')
+    
+    } else if(ataqueJugador.length > 4) {
+        
+        if (victoriasJugador > victoriasEnemigo) {
+            mensajeFinal('FELICITACIONES, ERES EL GANADOR')
+            
+        } else if (victoriasEnemigo > victoriasJugador) {
+            mensajeFinal('PERDISTE, VUELTE A INTENTARLO')
+        
+        } else {
+        mensajeFinal('EMPATE, JUEGA DE NUEVO')
+        }
     }
 }
-
 function crearMensaje(resultadojuego){
 
     let parrafo = document.createElement("div")
@@ -358,15 +378,10 @@ function crearMensaje(resultadojuego){
 
 function mensajeFinal(resultadoFinal){
 
-    //let divMensajeFinal = document.getElementById("mensajeFinal")
     let parrafo = document.createElement("p")
     parrafo.innerHTML = resultadoFinal  
     
     divMensajeFinal.appendChild(parrafo)
-
-    // botones.forEach((boton) => {
-    //     boton.disabled = true 
-    // })
 
     function deshabilitarBoton(btn) {
         btn.disabled = true 
@@ -374,7 +389,7 @@ function mensajeFinal(resultadoFinal){
 
     botones.forEach(deshabilitarBoton)
 
-
+    sectionEligeTuAtaque.style.display = "none"
     sectionReiniciar.style.display = "block"
     divMensajeFinal.style.display = "flex"
 

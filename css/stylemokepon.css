@@ -131,6 +131,7 @@ h2{
 #seleccionar-ataque{
   flex-direction: column;
   align-items: center;
+  margin-top:50px;
 }
 
 .cuadro2{
@@ -214,7 +215,7 @@ h2{
   background: rgb(236, 240, 236);
   color: rgb(9, 9, 9);
   height: 55px;
-  width: 200px;
+  width: 250px;
   border-radius: 30px;
   font-size: 20px;
   align-items: center;
@@ -245,6 +246,9 @@ h2{
   align-items: center;
   height:100%;
   font-size: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 38px;
  
 }
 
@@ -255,7 +259,7 @@ h2{
   background: #FFCC01;
   color: rgb(0, 0, 0);
   height: 55px;
-  width: 350px;
+  width: 380px;
   border: 3px solid black;
   border-radius: 30px;
   font-size: 20px;
@@ -274,9 +278,9 @@ h2{
   align-items: center;
   height: 60px;
   flex-direction: column;
-  padding-top: 5px;
-  font-size: 18px;
-  width:45px;
+  padding-top: 9px;
+  font-size: 14px;
+  width:48px;
   
 }
 
@@ -305,7 +309,7 @@ h2{
 }
 
 #img-ataque-jugador, #img-ataque-enemigo{
-  margin-top:16px;
+  margin-top:53px;
   padding:0px;
 }
 
@@ -320,7 +324,7 @@ h2{
 
 #vidas-jugador, #vidas-enemigo{
   font-size:53px;
-  margin-top:-5px;
+  margin-top:-3px;
 }
 
 .mostrar-mascota{

@@ -73,51 +73,51 @@ let Tucapalma = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg"
 let Pydos = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5)
 
 Hipodoge.ataques.push(
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 Capipepo.ataques.push(
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
 )
 
 Ratigueya.ataques.push(
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 Langostelvis.ataques.push(
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 Tucapalma.ataques.push(
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
 )
 
 Pydos.ataques.push(
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fuego', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Agua', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Tierra', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
 mokepones.push(Hipodoge,Capipepo,Ratigueya,Langostelvis,Tucapalma,Pydos)
@@ -126,17 +126,21 @@ function iniciarJuego() {
     
     
     divMensajeFinal.style.display = "none"
-    //sectionVerMapa.style.display = "none"
+    sectionVerMapa.style.display = "none"
     sectionReiniciar.style.display = "none"
     sectionSeleccionarAtaque.style.display = "none"
     divResultado.style.display = "none"
 
     mokepones.forEach((mokepon) => {
+
+        
         opcionDeMokepones = `<Label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
         <input type="radio" name="mascota" id=${mokepon.nombre} data-img="${mokepon.imagen}" />${mokepon.nombre}
-        <img src=${mokepon.imagen} alt=${mokepon.nombre}>
+        <img class="elegir" src=${mokepon.imagen} alt=${mokepon.nombre}><div class="div-poderes"><img class="poderes" src=${mokepon.ataques[0].img}><img class="poderes" src=${mokepon.ataques[1].img}><img class="poderes" src=${mokepon.ataques[2].img}><img class="poderes" src=${mokepon.ataques[3].img}><img class="poderes" src=${mokepon.ataques[4].img}></div>
         </Label>
         `
+        
+        
         contenedorTarjetas.innerHTML += opcionDeMokepones
 
         inputHipodoge = document.getElementById("Hipodoge")
@@ -196,11 +200,11 @@ function seleccionarMascotaJugador() {
     // let imagenDeCapipepo = new Image()
     // imagenDeCapipepo.src = Capipepo.imagen
     // lienzo.drawImage(
-    //     imagenDeCapipepo,
-    //     20,
-    //     40,
-    //     100,
-    //     100
+    //      imagenDeCapipepo,
+    //      20,
+    //      40,
+    //      100,
+    //      100
     // )
     
     sectionSeleccionarMascota.style.display = "none"
@@ -248,22 +252,22 @@ function atacar(e) {
     const boton = e.currentTarget;
 
     if (boton.dataset.id === 'boton-fuego') {
-        ataqueJugador.push("FUEGO")
-        jugadaJugador = "FUEGO"
+        ataqueJugador.push("FIRE")
+        jugadaJugador = "FIRE"
         console.log(ataqueJugador)
         spanImagenAtaqueJugador = '<img id="boton-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
         
         
     } else if(boton.dataset.id === 'boton-agua') {
-        ataqueJugador.push("AGUA")
+        ataqueJugador.push("WATER")
         console.log(ataqueJugador)
-        jugadaJugador = "AGUA"
+        jugadaJugador = "WATER"
         spanImagenAtaqueJugador = '<img id="boton-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
 
     } else {
-        ataqueJugador.push("TIERRA")
+        ataqueJugador.push("GROUND")
         console.log(ataqueJugador)
-        jugadaJugador = "TIERRA"
+        jugadaJugador = "GROUND"
         spanImagenAtaqueJugador = '<img id="boton-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
 
     }
@@ -294,21 +298,21 @@ function seleccionarMascotaEnemigo(){
 function ataqueAleatorioEnemigo(){
     ataqueAleatorio1 = aleatorio(0,ataquesMokeponEnemigo.length -1)
 
-    if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Fuego"){
-        ataqueEnemigo.push("FUEGO")
-        jugadaEnemigo = "FUEGO"
+    if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Fire"){
+        ataqueEnemigo.push("FIRE")
+        jugadaEnemigo = "FIRE"
         spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">`
     }
 
-    else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Agua"){
-        ataqueEnemigo.push("AGUA")
-        jugadaEnemigo = "AGUA"
+    else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Water"){
+        ataqueEnemigo.push("WATER")
+        jugadaEnemigo = "WATER"
         spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">`
     }
 
-     else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Tierra") {
-        ataqueEnemigo.push("TIERRA")
-        jugadaEnemigo = "TIERRA"
+     else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Ground") {
+        ataqueEnemigo.push("GROUND")
+        jugadaEnemigo = "GROUND"
         spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>`
     }
     
@@ -332,17 +336,17 @@ function pelea(){
 
         if(jugadaJugador === jugadaEnemigo) {
             // indexAmbosOponentes(index, index)
-            crearMensaje("EMPATE")   
+            crearMensaje("TIE")   
 
-        } else if(jugadaJugador === "FUEGO" && jugadaEnemigo === "TIERRA" || jugadaJugador === "AGUA" && jugadaEnemigo === "FUEGO" || jugadaJugador === "TIERRA" && jugadaEnemigo ==="AGUA" ){
-        crearMensaje("GANASTE") 
+        } else if(jugadaJugador === "FIRE" && jugadaEnemigo === "GROUND" || jugadaJugador === "WATER" && jugadaEnemigo === "FIRE" || jugadaJugador === "GROUND" && jugadaEnemigo ==="WATER" ){
+        crearMensaje("YOU WON") 
         victoriasJugador++
         //spanVidasEnemigo.innerHTML = vidasEnemigo
         spanVictoriasJugador.innerHTML = victoriasJugador
 
 
         } else {
-        crearMensaje("PERDISTE") 
+        crearMensaje("YOU LOST") 
         
         victoriasEnemigo++ //Es lo mismo que vidasJugador-= 1 o vidasJugador--
         spanVictoriasEnemigo.innerHTML = victoriasEnemigo
@@ -356,21 +360,21 @@ function pelea(){
 function revisarvidas(){
 
     if(victoriasJugador === 3){
-        mensajeFinal('FELICITACIONES, ERES EL GANADOR')
+        mensajeFinal('CONGRATULATIONS, YOU ARE THE WINNER')
         
     } else if (victoriasEnemigo === 3) {
-        mensajeFinal('PERDISTE, VUELTE A INTENTARLO')
+        mensajeFinal('YOU LOST, TRY AGAIN')
     
     } else if(ataqueJugador.length > 4) {
         
         if (victoriasJugador > victoriasEnemigo) {
-            mensajeFinal('FELICITACIONES, ERES EL GANADOR')
+            mensajeFinal('CONGRATULATIONS, YOU ARE THE WINNER')
             
         } else if (victoriasEnemigo > victoriasJugador) {
-            mensajeFinal('PERDISTE, VUELTE A INTENTARLO')
+            mensajeFinal('YOU LOST, TRY AGAIN')
         
         } else {
-        mensajeFinal('EMPATE, JUEGA DE NUEVO')
+        mensajeFinal('TIE, PLAY AGAIN')
         }
     }
 }

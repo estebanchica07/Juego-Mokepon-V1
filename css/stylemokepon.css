@@ -18,9 +18,9 @@ body{
   background-color: #2E69B3;
   opacity: 80%;
   border: 5px solid white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 25px;  
-  margin-top: 20px;
+  margin-top: 15px;
   
 }
 
@@ -47,9 +47,9 @@ body{
 h2{
   color:white;
   text-align: center;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  font-size: 25px;
+  margin-top: 0px;
+  margin-bottom: 12px;
+  font-size: 30px;
 }
 
   
@@ -58,13 +58,13 @@ h2{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top:50px;
+  margin-top:30px;
 }
 
 .tarjeta-de-mokepon{
   display:flex;
   width: 200px;
-  height: 250px;
+  height: 260px;
   padding: 5px;
   background: rgb(0, 0, 0);
   box-sizing: border-box;
@@ -79,9 +79,16 @@ h2{
   cursor:pointer;/*Para poner la manito del click*/
 }
 
-.tarjeta-de-mokepon img, .imagen-selected{
+.elegir {
   
-  margin-top: 20px;
+  margin-top: 12px;
+  height:160px;
+  margin-bottom: 8px;
+
+}
+
+.imagen-selected{
+  margin-top: 25px;
   height:160px;
 
 }
@@ -131,7 +138,7 @@ h2{
 #seleccionar-ataque{
   flex-direction: column;
   align-items: center;
-  margin-top:50px;
+  margin-top:30px;
 }
 
 .cuadro2{
@@ -142,9 +149,9 @@ h2{
   background-color: #2E69B3;
   opacity: 80%;
   border: 5px solid white;
-  padding: 20px;
+  padding: 18px;
   border-radius: 25px;  
-  margin-top: 20px;
+  margin-top: 18px;
   justify-content: center;
 
 }
@@ -169,7 +176,7 @@ h2{
 }
 
 .botones-ataque{
-  margin-top: 20px;
+  margin-top: 14px;
   
 }
 
@@ -259,7 +266,7 @@ h2{
   background: #FFCC01;
   color: rgb(0, 0, 0);
   height: 55px;
-  width: 380px;
+  width: 440px;
   border: 3px solid black;
   border-radius: 30px;
   font-size: 20px;
@@ -394,3 +401,48 @@ p.mostrar-mascota{
   font-size:50px;
 }
 
+.poderes{
+  display: flex;
+  flex-direction: row;
+  margin-top: 2px;
+  width:28px;
+  margin-left: 1.5px;
+  margin-right: 1.5px;
+  
+}
+
+.div-poderes{
+  display: flex;
+}
+
+.muestra-poderes{
+  display: flex;
+  margin-top: 2px;
+  width:40px;
+
+}
+ .reglas{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 12px;
+  margin-top: 15px;
+ }
+
+ .beats{
+    display: flex;
+    margin: 0 20px 0 20px;
+    border: 2px solid black;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    background-color: white;
+    opacity: 90%;
+ }
+
+ .remember{
+  font-size: 25px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+ }

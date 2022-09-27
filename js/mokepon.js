@@ -26,6 +26,9 @@ const spanVictoriasEnemigo = document.getElementById("vidas-enemigo")
 const contenedorTarjetas = document.getElementById("contenedorTarjetas")
 const contenedorAtaques = document.getElementById("contenedorAtaques")
 
+const sectionVerMapa = document.getElementById("ver-mapa")
+const mapa = document.getElementById("mapa")
+
 let mokepones = []
 let ataqueJugador = [] 
 let jugadaJugador
@@ -51,7 +54,7 @@ let indexAtaqueJugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
-
+//let lienzo = mapa.getContext("2d")
 
 class Mokepon {
     constructor(nombre, imagen, vida) {
@@ -121,7 +124,9 @@ mokepones.push(Hipodoge,Capipepo,Ratigueya,Langostelvis,Tucapalma,Pydos)
 
 function iniciarJuego() {
     
+    
     divMensajeFinal.style.display = "none"
+    //sectionVerMapa.style.display = "none"
     sectionReiniciar.style.display = "none"
     sectionSeleccionarAtaque.style.display = "none"
     divResultado.style.display = "none"
@@ -177,7 +182,7 @@ function seleccionarMascotaJugador() {
 
     } else {
         alert("Debes seleccionar un MOKEPON")
-        reload()
+        location.reload()
     }
 
     if (selectedId) {
@@ -186,6 +191,18 @@ function seleccionarMascotaJugador() {
     } 
 
     sectionSeleccionarAtaque.style.display = "flex"
+    
+    // sectionVerMapa.style.display = "flex"
+    // let imagenDeCapipepo = new Image()
+    // imagenDeCapipepo.src = Capipepo.imagen
+    // lienzo.drawImage(
+    //     imagenDeCapipepo,
+    //     20,
+    //     40,
+    //     100,
+    //     100
+    // )
+    
     sectionSeleccionarMascota.style.display = "none"
 
     extraerAtaques(selectedId)
@@ -223,7 +240,6 @@ function mostrarAtaques(ataques){
     botonFuego = document.getElementById('boton-fuego') 
     botonAgua = document.getElementById('boton-agua')
     botonTierra = document.getElementById('boton-tierra')
-
     botones = document.querySelectorAll('.BAtaque')
     
 }

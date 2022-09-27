@@ -18,11 +18,11 @@ h2{
   }
 
   .cuadro{
-    width:290px;
+    width:320px;
   }
 
   .tarjeta-de-mokepon{
-    width: 270px;
+    width: 300px;
   }
 
   .mascotas-elegidas{
@@ -126,10 +126,14 @@ h2{
 
 .reglas{
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   margin-top: 15px;
 }
 
 .remember{
   font-size: 20px;
+}
+
+.beats{
+  margin: 3px 0px 2px 0px;
 }

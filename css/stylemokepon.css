@@ -12,15 +12,16 @@ body{
   width: 350px;
 }
 
+
 .cuadro{
   display: flex;
   flex-direction: column;
   background-color: #2E69B3;
   opacity: 80%;
   border: 5px solid white;
-  padding: 15px;
+  padding: 10px;
   border-radius: 25px;  
-  margin-top: 15px;
+  margin-top: 10px;
   
 }
 
@@ -30,17 +31,18 @@ body{
 	align-content: center;
   flex-wrap:wrap;
   justify-content: center;
+  margin-top: -5px;
 }
 
 .titulo {
   display:flex;
   width: 320px;
   height: 50px;
-  margin-top: -22px;
-  margin-bottom: 5px;
+  margin-top: -30px;
+  margin-bottom: 1px;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 
@@ -48,7 +50,7 @@ h2{
   color:white;
   text-align: center;
   margin-top: 0px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   font-size: 30px;
 }
 
@@ -58,7 +60,7 @@ h2{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top:30px;
+  margin-top:20px;
 }
 
 .tarjeta-de-mokepon{
@@ -117,7 +119,7 @@ h2{
 
 .seleccionar{
   display:flex;
-  margin: 15px auto 10px;
+  margin: 10px auto 8px;
   background: rgb(236, 240, 236);
   color: rgb(9, 9, 9);
   height: 55px;
@@ -138,7 +140,7 @@ h2{
 #seleccionar-ataque{
   flex-direction: column;
   align-items: center;
-  margin-top:30px;
+  margin-top:20px;
 }
 
 .cuadro2{
@@ -427,8 +429,8 @@ p.mostrar-mascota{
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 12px;
-  margin-top: 15px;
+  margin-bottom: 8px;
+  margin-top: 8px;
  }
 
  .beats{
@@ -444,5 +446,5 @@ p.mostrar-mascota{
  .remember{
   font-size: 25px;
   margin-bottom: 0px;
-  margin-top: 10px;
+  margin-top: 7px;
  }

@@ -117,7 +117,7 @@ h2{
 
 .seleccionar{
   display:flex;
-  margin: 25px auto 15px;
+  margin: 15px auto 10px;
   background: rgb(236, 240, 236);
   color: rgb(9, 9, 9);
   height: 55px;

@@ -383,11 +383,11 @@ function mensajeFinal(resultadoFinal){
     
     divMensajeFinal.appendChild(parrafo)
 
-    function deshabilitarBoton(btn) {
-        btn.disabled = true 
-    }
+    // function deshabilitarBoton(btn) {
+    //     btn.disabled = true 
+    // }
 
-    botones.forEach(deshabilitarBoton)
+//    botones.forEach(deshabilitarBoton)
 
     sectionEligeTuAtaque.style.display = "none"
     sectionReiniciar.style.display = "block"

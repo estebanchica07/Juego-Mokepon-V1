@@ -1,3 +1,7 @@
+h2{
+  font-size: 25px;
+}
+
 .elegir-mascota{
     flex-direction: column;
   }
@@ -120,3 +124,12 @@
     margin-top: -5px;
 }
 
+.reglas{
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+.remember{
+  font-size: 20px;
+}

@@ -19,6 +19,7 @@ h2{
 
   .cuadro{
     width:320px;
+    margin-bottom: 30px;
   }
 
   .tarjeta-de-mokepon{
@@ -137,3 +138,4 @@ h2{
 .beats{
   margin: 3px 0px 2px 0px;
 }
+

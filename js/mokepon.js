@@ -52,6 +52,8 @@ let ataqueAleatorio
 let ataqueAleatorio1
 let indexAtaqueJugador
 let indexAtaqueEnemigo
+let ataquesDeTodos
+let arrayAtaques = []
 let victoriasJugador = 0
 let victoriasEnemigo = 0
 //let lienzo = mapa.getContext("2d")
@@ -132,15 +134,22 @@ function iniciarJuego() {
     divResultado.style.display = "none"
 
     mokepones.forEach((mokepon) => {
-
+        let htmlPoderes = ""
+        mokepon.ataques.forEach((poder) => {
+            htmlPoderes += `<img class="poderes" src=${poder.img}>`
+        })
         
         opcionDeMokepones = `<Label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
-        <input type="radio" name="mascota" id=${mokepon.nombre} data-img="${mokepon.imagen}" />${mokepon.nombre}
-        <img class="elegir" src=${mokepon.imagen} alt=${mokepon.nombre}><div class="div-poderes"><img class="poderes" src=${mokepon.ataques[0].img}><img class="poderes" src=${mokepon.ataques[1].img}><img class="poderes" src=${mokepon.ataques[2].img}><img class="poderes" src=${mokepon.ataques[3].img}><img class="poderes" src=${mokepon.ataques[4].img}></div>
+        <input type="radio" name="mascota" id=${mokepon.nombre} data-img="${mokepon.imagen}" />
+        ${mokepon.nombre}
+        <img class="elegir" src=${mokepon.imagen} alt=${mokepon.nombre}>
+        <div class="div-poderes">
+            ${htmlPoderes}
+        </div>
         </Label>
         `
         
-        
+        console.log(mokepon.ataques)
         contenedorTarjetas.innerHTML += opcionDeMokepones
 
         inputHipodoge = document.getElementById("Hipodoge")
@@ -149,8 +158,10 @@ function iniciarJuego() {
         inputLangostelvis = document.getElementById("Langostelvis")
         inputTucapalma = document.getElementById("Tucapalma")
         inputPydos = document.getElementById("Pydos")
-
+          
     })
+
+    // <img class="poderes" src=${mokepon.ataques[0].img}><img class="poderes" src=${bueno.img}><img class="poderes" src=${mokepon.ataques[2].img}><img class="poderes" src=${mokepon.ataques[3].img}><img class="poderes" src=${mokepon.ataques[4].img}></img>
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 

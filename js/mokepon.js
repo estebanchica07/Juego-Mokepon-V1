@@ -252,6 +252,7 @@ function mostrarAtaques(ataques){
         
     })
     
+    alert(window.innerWidth)
     botonFuego = document.getElementById('boton-fuego') 
     botonAgua = document.getElementById('boton-agua')
     botonTierra = document.getElementById('boton-tierra')

@@ -395,6 +395,8 @@ p.mostrar-mascota{
 
 #mapa{
   border:2px solid white;
+  
+
 
 }
 
@@ -447,4 +449,30 @@ p.mostrar-mascota{
   font-size: 25px;
   margin-bottom: 0px;
   margin-top: 7px;
+ }
+
+ .flechas{
+  display: flex;
+  flex-direction: column;
+  margin-top:20px;
+ }
+
+ .boton-move{
+  flex-direction: row;
+  background-color: transparent;
+  border: none;
+  margin: -2px;
+  margin-bottom: 9px;
+  
+
+ }
+
+ .direcciones{
+  
+  height: 45px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 18px;
+  padding: 1px;
+  
  }

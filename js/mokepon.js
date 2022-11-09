@@ -29,6 +29,13 @@ const contenedorAtaques = document.getElementById("contenedorAtaques")
 const sectionVerMapa = document.getElementById("ver-mapa")
 const mapa = document.getElementById("mapa")
 
+const botonArriba = document.getElementById("boton-arriba")
+const botonIzquierda = document.getElementById("boton-izquierda")
+const botonAbajo = document.getElementById("boton-abajo")
+const botonDerecha = document.getElementById("boton-derecha")
+
+
+
 let mokepones = []
 let ataqueJugador = [] 
 let jugadaJugador
@@ -43,6 +50,7 @@ let inputLangostelvis
 let inputTucapalma
 let inputPydos
 let mascotaJugador
+let mascotaJugadorObjeto
 let ataquesMokepon
 let botonFuego
 let botonAgua
@@ -56,25 +64,60 @@ let ataquesDeTodos
 let arrayAtaques = []
 let victoriasJugador = 0
 let victoriasEnemigo = 0
-//let lienzo = mapa.getContext("2d")
+let intervalo
+let lienzo = mapa.getContext("2d")
+let mapaBackground = new Image()
+mapaBackground.src = './imagenes/mapa3.jpg'
 
 class Mokepon {
-    constructor(nombre, imagen, vida) {
+    constructor(nombre, imagen, vida, fotoMapa, x = 700, y = 270) {
         this.nombre = nombre
         this.imagen = imagen
         this.vida = vida
         this.ataques = []
+        this.x = x
+        this.y = y
+        this.ancho = 50
+        this.alto = 50
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = fotoMapa
+        this.velocidadX = 0
+        this.velocidadY = 0
+    }
+    pintarMokepon() {
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto,
+        )
     }
 }
 
-let Hipodoge = new Mokepon("Hipodoge","./imagenes/pokemon-17.svg",5)
-let Capipepo = new Mokepon("Capipepo","./imagenes/pidgeot-seeklogo.com.svg",5)
-let Ratigueya = new Mokepon("Ratigueya","./imagenes/pokemon-5.svg",5)
-let Langostelvis = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6142-seeklogo.com.png",5)
-let Tucapalma = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5)
-let Pydos = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5)
+let Hipodoge = new Mokepon("Hipodoge","./imagenes/pokemon-17.svg",5,"./imagenes/pokemon-17.svg")
+let Capipepo = new Mokepon("Capipepo","./imagenes/pidgeot-seeklogo.com.svg",5,"./imagenes/pidgeot-seeklogo.com.svg")
+let Ratigueya = new Mokepon("Ratigueya","./imagenes/pokemon-5.svg",5, "./imagenes/pokemon-5.svg")
+let Langostelvis = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6142-seeklogo.com.png",5,"./imagenes/charizard-logo-C9856A6142-seeklogo.com.png")
+let Tucapalma = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5,"./imagenes/butterfree-seeklogo.com.svg")
+let Pydos = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png")
+
+let HipodogeEnemigo = new Mokepon("Hipodoge","./imagenes/pokemon-17.svg",5,"./imagenes/pokemon-17.svg", 600, 10)
+let CapipepoEnemigo = new Mokepon("Capipepo","./imagenes/pidgeot-seeklogo.com.svg",5,"./imagenes/pidgeot-seeklogo.com.svg", 360, 210)
+let RatigueyaEnemigo = new Mokepon("Ratigueya","./imagenes/pokemon-5.svg",5, "./imagenes/pokemon-5.svg", 180, 340)
+let LangostelvisEnemigo = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6142-seeklogo.com.png",5,"./imagenes/charizard-logo-C9856A6142-seeklogo.com.png", 23, 5)
+let TucapalmaEnemigo = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5,"./imagenes/butterfree-seeklogo.com.svg", 300, 40)
+let PydosEnemigo = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png", 495, 165)
 
 Hipodoge.ataques.push(
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+)
+
+HipodogeEnemigo.ataques.push(
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
@@ -90,7 +133,23 @@ Capipepo.ataques.push(
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
 )
 
+CapipepoEnemigo.ataques.push(
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+)
+
 Ratigueya.ataques.push(
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+)
+
+RatigueyaEnemigo.ataques.push(
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
@@ -106,6 +165,14 @@ Langostelvis.ataques.push(
     { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
 )
 
+LangostelvisEnemigo.ataques.push(
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+)
+
 Tucapalma.ataques.push(
     { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
     { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
@@ -114,7 +181,24 @@ Tucapalma.ataques.push(
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
 )
 
+TucapalmaEnemigo.ataques.push(
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+)
+
+
 Pydos.ataques.push(
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+)
+
+PydosEnemigo.ataques.push(
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
@@ -129,6 +213,7 @@ function iniciarJuego() {
     
     divMensajeFinal.style.display = "none"
     sectionVerMapa.style.display = "none"
+   
     sectionReiniciar.style.display = "none"
     sectionSeleccionarAtaque.style.display = "none"
     divResultado.style.display = "none"
@@ -148,8 +233,7 @@ function iniciarJuego() {
         </div>
         </Label>
         `
-        
-        console.log(mokepon.ataques)
+    
         contenedorTarjetas.innerHTML += opcionDeMokepones
 
         inputHipodoge = document.getElementById("Hipodoge")
@@ -161,12 +245,8 @@ function iniciarJuego() {
           
     })
 
-    // <img class="poderes" src=${mokepon.ataques[0].img}><img class="poderes" src=${bueno.img}><img class="poderes" src=${mokepon.ataques[2].img}><img class="poderes" src=${mokepon.ataques[3].img}><img class="poderes" src=${mokepon.ataques[4].img}></img>
-
-    botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
-
-    
-    botonReiniciar.addEventListener('click', reiniciarJuego)
+        botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
+        botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 function seleccionarMascotaJugador() {
@@ -205,23 +285,15 @@ function seleccionarMascotaJugador() {
         spanImagenJugador.innerHTML = `<img class="imagen-selected" src="${imagenSelected}" alt="${selectedId}">`
     } 
 
-    sectionSeleccionarAtaque.style.display = "flex"
+    // sectionSeleccionarAtaque.style.display = "flex"
     
-    // sectionVerMapa.style.display = "flex"
-    // let imagenDeCapipepo = new Image()
-    // imagenDeCapipepo.src = Capipepo.imagen
-    // lienzo.drawImage(
-    //      imagenDeCapipepo,
-    //      20,
-    //      40,
-    //      100,
-    //      100
-    // )
+    sectionVerMapa.style.display = "flex"
     
     sectionSeleccionarMascota.style.display = "none"
 
     extraerAtaques(selectedId)
-    seleccionarMascotaEnemigo()
+    iniciarMapa()
+    
 
     document.querySelector(".cuadro2").scrollIntoView({behavior:"smooth"});
     
@@ -252,7 +324,7 @@ function mostrarAtaques(ataques){
         
     })
     
-    alert(window.innerWidth)
+    
     botonFuego = document.getElementById('boton-fuego') 
     botonAgua = document.getElementById('boton-agua')
     botonTierra = document.getElementById('boton-tierra')
@@ -296,18 +368,20 @@ function secuenciaAtaque() {
     })  
 }
 
-function seleccionarMascotaEnemigo(){
-    ataqueAleatorio = aleatorio(0, mokepones.length-1)
+function seleccionarMascotaEnemigo(enemigo){
+    //ataqueAleatorio = aleatorio(0, mokepones.length-1)
     
-    
-    spanMascotaEnemigo.innerHTML = mokepones[ataqueAleatorio].nombre
-    spanImagenEnemigo.innerHTML = `<img class="imagen-selected" src="${mokepones[ataqueAleatorio].imagen}" alt="${mokepones[ataqueAleatorio].nombre}">`  
-    ataquesMokeponEnemigo = mokepones[ataqueAleatorio].ataques
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    spanImagenEnemigo.innerHTML = `<img class="imagen-selected" src="${enemigo.imagen}" alt="${enemigo.nombre}">`  
+    //spanMascotaEnemigo.innerHTML = mokepones[ataqueAleatorio].nombre
+    //spanImagenEnemigo.innerHTML = `<img class="imagen-selected" src="${mokepones[ataqueAleatorio].imagen}" alt="${mokepones[ataqueAleatorio].nombre}">`  
+    ataquesMokeponEnemigo = enemigo.ataques
     secuenciaAtaque()
     
 }
     
 function ataqueAleatorioEnemigo(){
+    console.log()
     ataqueAleatorio1 = aleatorio(0,ataquesMokeponEnemigo.length -1)
 
     if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Fire"){
@@ -436,6 +510,140 @@ function reiniciarJuego(){
 function aleatorio(min,max) {
     return Math.floor(Math.random() * (max - min + 1)+ min)
 }
+
+function pintarCanvas(){
+
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+    mascotaJugadorObjeto.pintarMokepon()
+    HipodogeEnemigo.pintarMokepon()
+    CapipepoEnemigo.pintarMokepon()
+    RatigueyaEnemigo.pintarMokepon()
+    LangostelvisEnemigo.pintarMokepon()
+    TucapalmaEnemigo.pintarMokepon()
+    PydosEnemigo.pintarMokepon()
+
+    if(
+        mascotaJugadorObjeto.velocidadX !== 0 ||
+        mascotaJugadorObjeto.velocidadY !== 0
+    ) {
+        revisarColision(HipodogeEnemigo)
+        revisarColision(CapipepoEnemigo)
+        revisarColision(RatigueyaEnemigo)
+        revisarColision(LangostelvisEnemigo)
+        revisarColision(TucapalmaEnemigo)
+        revisarColision(PydosEnemigo)
+
+    }
+
+
+}
+
+function moverDerecha() {
+    mascotaJugadorObjeto.velocidadX = 5
+    botonDerecha.style.backgroundColor = '#FFCC01'
+}
+
+function moverIzquierda() {
+    mascotaJugadorObjeto.velocidadX = -5
+    botonIzquierda.style.backgroundColor = '#FFCC01'
+}
+
+function moverAbajo() {
+    mascotaJugadorObjeto.velocidadY = 5
+    botonAbajo.style.backgroundColor = '#FFCC01'
+}
+
+function moverArriba() {
+    mascotaJugadorObjeto.velocidadY = -5
+    botonArriba.style.backgroundColor = '#FFCC01'
+}
+
+function detenerMovimiento(){
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
+    botonDerecha.style.backgroundColor = 'white'
+    botonIzquierda.style.backgroundColor = 'white'
+    botonAbajo.style.backgroundColor = 'white'
+    botonArriba.style.backgroundColor = 'white'
+}
+
+function sePresionoUnaTecla(event){
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break
+        case 'ArrowDown':
+            moverAbajo()
+            break
+        case 'ArrowLeft':
+            moverIzquierda()
+            break
+        case 'ArrowRight':
+            moverDerecha()
+        default:
+            break
+    }
+}
+
+function iniciarMapa(){
+
+    
+mapa.width = 750
+mapa.height = 380
+mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
+intervalo = setInterval(pintarCanvas, 50)
+window.addEventListener('keydown', sePresionoUnaTecla)
+window.addEventListener('keyup', detenerMovimiento)
+}
+
+function obtenerObjetoMascota(){
+    for (let i = 0; i < mokepones.length; i++) {
+        if (selectedId === mokepones[i].nombre) {
+        return mokepones[i]
+        }
+    }
+}
+
+function revisarColision(enemigo){
+
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+    const izquierdaEnemigo = enemigo.x
+
+    const arribaMascota = mascotaJugadorObjeto.y
+    const abajoMascota = mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto
+    const derechaMascota = enemigo.x + enemigo.ancho
+    const izquierdaMascota = mascotaJugadorObjeto.x
+
+    if(
+        abajoMascota < arribaEnemigo || 
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquierdaEnemigo ||
+        izquierdaMascota > derechaEnemigo
+    ) {
+        return
+    }
+
+    detenerMovimiento()
+    console.log("se")
+    sectionSeleccionarAtaque.style.display = "flex"
+    sectionVerMapa.style.display = "none"
+    seleccionarMascotaEnemigo(enemigo)
+    
+
+    }
+
+
 
 window.addEventListener('load', iniciarJuego)
 

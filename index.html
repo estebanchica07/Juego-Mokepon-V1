@@ -41,8 +41,6 @@
                     </div>
                 <div id="contenedorTarjetas" class="elegir-mascota">
                 
-                
-
                 </div>
                 <div class="boton-seleccionar">
                     <button id="boton-mascota" class="seleccionar">SELECT</button>
@@ -54,6 +52,15 @@
     <section id="ver-mapa">
         <h1 class="recorrer-mapa">Recorre el mapa con tu Mascota</h1>
         <canvas id="mapa"></canvas>
+        <div class="flechas">
+            
+                <button class="boton-move" onmouseup="detenerMovimiento()" onmousedown="moverArriba()"><img id="boton-arriba" class="direcciones" src="imagenes/up.png"> </button>
+            <div>
+                <button class="boton-move" onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()"><img id="boton-izquierda" class="direcciones" src="imagenes/left.png"></button>
+                <button class="boton-move" onmouseup="detenerMovimiento()" onmousedown="moverAbajo()"><img id="boton-abajo" class="direcciones" src="imagenes/down.png"></button>
+                <button class="boton-move" onmouseup="detenerMovimiento()" onmousedown="moverDerecha()"><img id="boton-derecha" class="direcciones" src="imagenes/right.png"></button>
+            </div>
+        </div>
     </section>
 
     <section id="seleccionar-ataque">

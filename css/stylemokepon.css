@@ -393,16 +393,16 @@ p.mostrar-mascota{
   
 }
 
-#mapa{
-  border:2px solid white;
-  
 
-
-}
 
 .recorrer-mapa{
+  display: flex;
   color:white;
-  font-size:50px;
+  font-size:40px;
+  flex-direction: column;
+  text-align: center;
+
+
 }
 
 .poderes{

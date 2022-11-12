@@ -67,18 +67,35 @@ let victoriasEnemigo = 0
 let intervalo
 let lienzo = mapa.getContext("2d")
 let mapaBackground = new Image()
-mapaBackground.src = './imagenes/mapa3.jpg'
+mapaBackground.src = './imagenes/mapa2.png'
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 10
+
+
+const anchoMaximoDelMapa = 520
+
+
+if(anchoDelMapa > anchoMaximoDelMapa){
+    anchoDelMapa = anchoMaximoDelMapa - 20
+} 
+
+
+
+alturaQueBuscamos = anchoDelMapa * 640 / 768
+
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
 
 class Mokepon {
-    constructor(nombre, imagen, vida, fotoMapa, x = 700, y = 270) {
+    constructor(nombre, imagen, vida, fotoMapa, x = 435, y = 185) {
         this.nombre = nombre
         this.imagen = imagen
         this.vida = vida
         this.ataques = []
         this.x = x
         this.y = y
-        this.ancho = 50
-        this.alto = 50
+        this.ancho = 45
+        this.alto = 45
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -102,12 +119,12 @@ let Langostelvis = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6
 let Tucapalma = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5,"./imagenes/butterfree-seeklogo.com.svg")
 let Pydos = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png")
 
-let HipodogeEnemigo = new Mokepon("Hipodoge","./imagenes/pokemon-17.svg",5,"./imagenes/pokemon-17.svg", 600, 10)
-let CapipepoEnemigo = new Mokepon("Capipepo","./imagenes/pidgeot-seeklogo.com.svg",5,"./imagenes/pidgeot-seeklogo.com.svg", 360, 210)
-let RatigueyaEnemigo = new Mokepon("Ratigueya","./imagenes/pokemon-5.svg",5, "./imagenes/pokemon-5.svg", 180, 340)
-let LangostelvisEnemigo = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6142-seeklogo.com.png",5,"./imagenes/charizard-logo-C9856A6142-seeklogo.com.png", 23, 5)
+let HipodogeEnemigo = new Mokepon("Hipodoge","./imagenes/pokemon-17.svg",5,"./imagenes/pokemon-17.svg", 235, 0)
+let CapipepoEnemigo = new Mokepon("Capipepo","./imagenes/pidgeot-seeklogo.com.svg",5,"./imagenes/pidgeot-seeklogo.com.svg", 170, 150)
+let RatigueyaEnemigo = new Mokepon("Ratigueya","./imagenes/pokemon-5.svg",5, "./imagenes/pokemon-5.svg", 237, 360)
+let LangostelvisEnemigo = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6142-seeklogo.com.png",5,"./imagenes/charizard-logo-C9856A6142-seeklogo.com.png", 25, 185)
 let TucapalmaEnemigo = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5,"./imagenes/butterfree-seeklogo.com.svg", 300, 40)
-let PydosEnemigo = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png", 495, 165)
+let PydosEnemigo = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png", 420, 30)
 
 Hipodoge.ataques.push(
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
@@ -596,9 +613,6 @@ function sePresionoUnaTecla(event){
 
 function iniciarMapa(){
 
-    
-mapa.width = 750
-mapa.height = 380
 mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
 intervalo = setInterval(pintarCanvas, 50)
 window.addEventListener('keydown', sePresionoUnaTecla)

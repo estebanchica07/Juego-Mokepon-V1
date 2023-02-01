@@ -1,3 +1,5 @@
+//const { application } = require("express")
+
 const divMensajeFinal = document.getElementById("mensajeFinal")
 const sectionReiniciar = document.getElementById("reiniciar")
 const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
@@ -35,7 +37,7 @@ const botonAbajo = document.getElementById("boton-abajo")
 const botonDerecha = document.getElementById("boton-derecha")
 
 
-
+let jugadorId = null
 let mokepones = []
 let ataqueJugador = [] 
 let jugadaJugador
@@ -87,15 +89,16 @@ mapa.width = anchoDelMapa
 mapa.height = alturaQueBuscamos
 
 class Mokepon {
-    constructor(nombre, imagen, vida, fotoMapa, x = 435, y = 185) {
+    constructor(nombre, imagen, vida, fotoMapa, id = null) {
+        this.id = id
         this.nombre = nombre
         this.imagen = imagen
         this.vida = vida
         this.ataques = []
-        this.x = x
-        this.y = y
-        this.ancho = 45
-        this.alto = 45
+        this.ancho = 40
+        this.alto = 40
+        this.x = aleatorio(0, mapa.width - this.ancho)
+        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -119,109 +122,71 @@ let Langostelvis = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6
 let Tucapalma = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5,"./imagenes/butterfree-seeklogo.com.svg")
 let Pydos = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png")
 
-let HipodogeEnemigo = new Mokepon("Hipodoge","./imagenes/pokemon-17.svg",5,"./imagenes/pokemon-17.svg", 235, 0)
-let CapipepoEnemigo = new Mokepon("Capipepo","./imagenes/pidgeot-seeklogo.com.svg",5,"./imagenes/pidgeot-seeklogo.com.svg", 170, 150)
-let RatigueyaEnemigo = new Mokepon("Ratigueya","./imagenes/pokemon-5.svg",5, "./imagenes/pokemon-5.svg", 237, 360)
-let LangostelvisEnemigo = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6142-seeklogo.com.png",5,"./imagenes/charizard-logo-C9856A6142-seeklogo.com.png", 25, 185)
-let TucapalmaEnemigo = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5,"./imagenes/butterfree-seeklogo.com.svg", 300, 40)
-let PydosEnemigo = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png", 420, 30)
+const HIPODOGE_ATAQUES = [
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+]
 
-Hipodoge.ataques.push(
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+Hipodoge.ataques.push(...HIPODOGE_ATAQUES)
+//HipodogeEnemigo.ataques.push(...HIPODOGE_ATAQUES)
 
-HipodogeEnemigo.ataques.push(
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+const CAPIPEPO_ATAQUES = [
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+]
 
-Capipepo.ataques.push(
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-)
+Capipepo.ataques.push(...CAPIPEPO_ATAQUES)
+//CapipepoEnemigo.ataques.push(...CAPIPEPO_ATAQUES)
 
-CapipepoEnemigo.ataques.push(
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+const RATIGUEYA_ATAQUES = [
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-)
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+]
 
-Ratigueya.ataques.push(
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+Ratigueya.ataques.push(...RATIGUEYA_ATAQUES)
+//RatigueyaEnemigo.ataques.push(...RATIGUEYA_ATAQUES)
 
-RatigueyaEnemigo.ataques.push(
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
+const LANGOSTELVIS_ATAQUES = [
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+]
 
-Langostelvis.ataques.push(
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+Langostelvis.ataques.push(...LANGOSTELVIS_ATAQUES)
+//LangostelvisEnemigo.ataques.push(...LANGOSTELVIS_ATAQUES)
 
-LangostelvisEnemigo.ataques.push(
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
+const TUCAPALMA_ATAQUES = [
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+]
 
-Tucapalma.ataques.push(
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-)
+Tucapalma.ataques.push(...TUCAPALMA_ATAQUES)
+//TucapalmaEnemigo.ataques.push(...TUCAPALMA_ATAQUES)
 
-TucapalmaEnemigo.ataques.push(
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-)
-
-
-Pydos.ataques.push(
+const PYDOS_ATAQUES = [
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
     { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"}, 
+]
 
-PydosEnemigo.ataques.push(
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Fire', id: 'boton-fuego', img: "./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png"},
-    { nombre: 'Water', id: 'boton-agua', img: "./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png"},
-    { nombre: 'Ground', id: 'boton-tierra', img: "./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png"},
-)
+Pydos.ataques.push(...PYDOS_ATAQUES)
+//PydosEnemigo.ataques.push(...PYDOS_ATAQUES)
 
 mokepones.push(Hipodoge,Capipepo,Ratigueya,Langostelvis,Tucapalma,Pydos)
 
@@ -264,7 +229,24 @@ function iniciarJuego() {
 
         botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
         botonReiniciar.addEventListener('click', reiniciarJuego)
+        
+        unirseAlJuego()
 }
+
+function unirseAlJuego(){
+
+    fetch("http://localhost:8080/unirse")
+        .then(function (res){
+            if (res.ok) {
+            res.text()
+                .then(function(respuesta){
+                    console.log(respuesta) 
+                    jugadorId = respuesta  
+                })
+            }
+        })
+}
+
 
 function seleccionarMascotaJugador() {
 
@@ -302,6 +284,8 @@ function seleccionarMascotaJugador() {
         spanImagenJugador.innerHTML = `<img class="imagen-selected" src="${imagenSelected}" alt="${selectedId}">`
     } 
 
+    seleccionarMokepon(selectedId)
+
     // sectionSeleccionarAtaque.style.display = "flex"
     
     sectionVerMapa.style.display = "flex"
@@ -314,6 +298,18 @@ function seleccionarMascotaJugador() {
 
     document.querySelector(".cuadro2").scrollIntoView({behavior:"smooth"});
     
+}
+
+function seleccionarMokepon(selectedId){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mokepon:selectedId
+        })
+    })
 }
 
 function extraerAtaques(selectedId){
@@ -541,27 +537,80 @@ function pintarCanvas(){
         mapa.height
     )
     mascotaJugadorObjeto.pintarMokepon()
-    HipodogeEnemigo.pintarMokepon()
-    CapipepoEnemigo.pintarMokepon()
-    RatigueyaEnemigo.pintarMokepon()
-    LangostelvisEnemigo.pintarMokepon()
-    TucapalmaEnemigo.pintarMokepon()
-    PydosEnemigo.pintarMokepon()
+    
+    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
 
-    if(
-        mascotaJugadorObjeto.velocidadX !== 0 ||
-        mascotaJugadorObjeto.velocidadY !== 0
-    ) {
-        revisarColision(HipodogeEnemigo)
-        revisarColision(CapipepoEnemigo)
-        revisarColision(RatigueyaEnemigo)
-        revisarColision(LangostelvisEnemigo)
-        revisarColision(TucapalmaEnemigo)
-        revisarColision(PydosEnemigo)
+    //HipodogeEnemigo.pintarMokepon()
+    //CapipepoEnemigo.pintarMokepon()
+    //RatigueyaEnemigo.pintarMokepon()
+    //LangostelvisEnemigo.pintarMokepon()
+    //TucapalmaEnemigo.pintarMokepon()
+   //PydosEnemigo.pintarMokepon()
+//
+    //if(
+    //    mascotaJugadorObjeto.velocidadX !== 0 ||
+    //    mascotaJugadorObjeto.velocidadY !== 0
+    //) {
+    //    revisarColision(HipodogeEnemigo)
+    //    revisarColision(CapipepoEnemigo)
+    //    revisarColision(RatigueyaEnemigo)
+    //    revisarColision(LangostelvisEnemigo)
+    //   revisarColision(TucapalmaEnemigo)
+    // //   revisarColision(PydosEnemigo)
+//
+    //}
 
-    }
 
+}
 
+function enviarPosicion(x, y) { 
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            x,
+            y
+        })
+
+    })
+    .then(function(res) {
+        if(res.ok) {
+            res.json()
+                .then(function ( {enemigos} ){
+                    console.log(enemigos)
+                    enemigos.forEach(function (enemigo) {
+                        let mokeponEnemigo = null
+                        if (enemigo.mokepon != undefined) {
+                        const mokeponNombre = enemigo.mokepon.nombre || ""
+                            if (mokeponNombre === "Hipodoge") {
+                                mokeponEnemigo = new Mokepon("Hipodoge","./imagenes/pokemon-17.svg",5,"./imagenes/pokemon-17.svg")
+                            } else if (mokeponNombre === "Capipepo"){
+                                mokeponEnemigo = new Mokepon("Capipepo","./imagenes/pidgeot-seeklogo.com.svg",5,"./imagenes/pidgeot-seeklogo.com.svg") 
+                            } else if (mokeponNombre === "Retigueya"){
+                                mokeponEnemigo = new Mokepon("Ratigueya","./imagenes/pokemon-5.svg",5, "./imagenes/pokemon-5.svg") 
+                            } else if (mokeponNombre === "Langostelvis"){
+                                mokeponEnemigo = new Mokepon("Langostelvis","./imagenes/charizard-logo-C9856A6142-seeklogo.com.png",5,"./imagenes/charizard-logo-C9856A6142-seeklogo.com.png")
+                            } else if (mokeponNombre === "Tucapalma"){
+                                mokeponEnemigo = new Mokepon("Tucapalma","./imagenes/butterfree-seeklogo.com.svg",5,"./imagenes/butterfree-seeklogo.com.svg")
+                            } else if (mokeponNombre === "Pydos") {
+                                mokeponEnemigo = new Mokepon("Pydos","./imagenes/dragonair-logo-D994877077-seeklogo.com.png",5,"./imagenes/dragonair-logo-D994877077-seeklogo.com.png")
+                            }
+
+                        mokeponEnemigo.x = enemigo.x
+                        mokeponEnemigo.y = enemigo.y
+                        
+                        mokeponEnemigo.pintarMokepon()
+                        
+                        }
+                        
+                    })
+                    
+                })
+            }
+    })
 }
 
 function moverDerecha() {
@@ -649,7 +698,6 @@ function revisarColision(enemigo){
     }
 
     detenerMovimiento()
-    console.log("se")
     sectionSeleccionarAtaque.style.display = "flex"
     sectionVerMapa.style.display = "none"
     seleccionarMascotaEnemigo(enemigo)

@@ -74,7 +74,8 @@ let mapaBackground = new Image()
 mapaBackground.src = './imagenes/mapa2.png'
 let alturaQueBuscamos
 let anchoDelMapa = window.innerWidth - 10
-
+let imagenAtaqueJugador
+let imagenAtaqueEnemigo
 
 const anchoMaximoDelMapa = 520
 
@@ -354,29 +355,44 @@ function atacar(e) {
         ataqueJugador.push("FIRE")
         jugadaJugador = "FIRE"
         console.log(ataqueJugador)
-        spanImagenAtaqueJugador = '<img id="boton-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
+        imagenAtaqueJugador = '<img id="boton-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
         
         
     } else if(boton.dataset.id === 'boton-agua') {
         ataqueJugador.push("WATER")
         console.log(ataqueJugador)
         jugadaJugador = "WATER"
-        spanImagenAtaqueJugador = '<img id="boton-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
+        imagenAtaqueJugador = '<img id="boton-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
 
     } else {
         ataqueJugador.push("GROUND")
         console.log(ataqueJugador)
         jugadaJugador = "GROUND"
-        spanImagenAtaqueJugador = '<img id="boton-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
+        imagenAtaqueJugador = '<img id="boton-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
 
     }
 
+    let spanImagenAtaqueJugador = document.getElementById("img-ataque-jugador")
+    let parrafo1 = document.createElement("div")
+    parrafo1.innerHTML = imagenAtaqueJugador   
+    spanImagenAtaqueJugador.appendChild(parrafo1)
+
+    //let spanImagenAtaqueEnemigo = document.getElementById("img-ataque-enemigo")
+    //let parrafo2 = document.createElement("div")
+    //spanImagenAtaqueEnemigo.appendChild(parrafo2)
+    //parrafo2.innerHTML = imagenAtaqueJugador  
+
+    //console.log(imagenAtaqueEnemigo)
+
         if (ataqueJugador.length === 5) {
             enviarAtaques()
+            
+            //crear variable obteniendo los datos de imagen y llamarlos en resultado del juego
         }
     
     //ataqueAleatorioEnemigo()
     //boton.style.background = '#3D3837'
+    
     boton.disabled = true
     boton.removeEventListener('click', atacar)
 }
@@ -414,12 +430,20 @@ function obtenerAtaques() {
                     
                     if (ataques.length === 5) {
                         ataqueEnemigo = ataques
+                        console.log(ataqueEnemigo)
+                        
+                         
+                        
                         pelea()
+                        divResultado.style.display = "flex"
+                        divVersus.style.display = "none"
+
                     }
                 })
             }
     })
 }
+
 
 function seleccionarMascotaEnemigo(enemigo){
     //ataqueAleatorio = aleatorio(0, mokepones.length-1)
@@ -441,19 +465,19 @@ function ataqueAleatorioEnemigo(){
     if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Fire"){
         ataqueEnemigo.push("FIRE")
         jugadaEnemigo = "FIRE"
-        spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">`
+        imagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">`
     }
 
     else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Water"){
         ataqueEnemigo.push("WATER")
         jugadaEnemigo = "WATER"
-        spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">`
+        imagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">`
     }
 
      else if (ataquesMokeponEnemigo[ataqueAleatorio1].nombre === "Ground") {
         ataqueEnemigo.push("GROUND")
         jugadaEnemigo = "GROUND"
-        spanImagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>`
+        imagenAtaqueEnemigo = `<img id="${ataquesMokeponEnemigo[ataqueAleatorio1].id}" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>`
     }
     
     console.log(ataqueEnemigo)
@@ -477,7 +501,7 @@ function pelea(){
         clearInterval(intervalo)
 
         //ataqueJugador vs ataqueEnemigo
-        ataqueJugador.map((jugadaJugador, index)=>{
+        ataqueJugador.map((jugadaJugador, index) => {
             const jugadaEnemigo2 = ataqueEnemigo[index]
             console.log("Analizando jugada", jugadaJugador,"vs", jugadaEnemigo2)
 
@@ -527,21 +551,11 @@ function revisarvidas(){
         }
     }
 }
-function crearMensaje(resultadojuego){
+function crearMensaje(resultadojuego) {
 
     let parrafo = document.createElement("div")
     parrafo.innerHTML = resultadojuego   
     divResultado.appendChild(parrafo)
-
-    let imagenataqueJugador = document.getElementById("img-ataque-jugador")
-    let parrafo1 = document.createElement("div")
-    parrafo1.innerHTML = imagenataqueJugador   
-    imagenataqueJugador.appendChild(parrafo1)
-
-    let imagenataqueEnemigo = document.getElementById("img-ataque-enemigo")
-    let parrafo2 = document.createElement("div")
-    parrafo2.innerHTML = imagenataqueEnemigo   
-    imagenataqueEnemigo.appendChild(parrafo2)
 
 }
 

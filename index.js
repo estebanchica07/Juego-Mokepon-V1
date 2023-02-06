@@ -49,6 +49,16 @@ app.get("/unirse", (req, res) => {
     res.send(id)
 })
 
+
+app.get("/limpiar", (req, res) => {
+
+    jugadores.length = 0
+
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    
+    res.send('servidor Reiniciado')
+})
+
 app.post("/mokepon/:jugadorId", (req, res) => {
     const jugadorId = req.params.jugadorId || ""
     const nombre = req.body.mokepon

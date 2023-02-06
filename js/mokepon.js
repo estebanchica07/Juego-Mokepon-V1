@@ -348,31 +348,24 @@ function mostrarAtaques(ataques){
     
 }
 
-function atacar(e) {
-    const boton = e.currentTarget;
-    
-    if (boton.dataset.id === 'boton-fuego') {
-        ataqueJugador.push("FIRE")
+function atacar(ataque, elem) {
+    if (ataque === 'FIRE') {
         jugadaJugador = "FIRE"
-        console.log(ataqueJugador)
         imagenAtaqueJugador = '<img id="boton-fuego" src="./imagenes/1200px-Pokémon_Fire_Type_Icon.svg.png" class="Fuego">'
         
         
-    } else if(boton.dataset.id === 'boton-agua') {
-        ataqueJugador.push("WATER")
-        console.log(ataqueJugador)
+    } else if(ataque === 'WATER') {
         jugadaJugador = "WATER"
         imagenAtaqueJugador = '<img id="boton-agua" src="./imagenes/1024px-Pokémon_Water_Type_Icon.svg.png" class="Agua">'
 
     } else {
-        ataqueJugador.push("GROUND")
-        console.log(ataqueJugador)
         jugadaJugador = "GROUND"
         imagenAtaqueJugador = '<img id="boton-tierra" src="./imagenes/1200px-Pokémon_Ground_Type_Icon.svg.png" class="Tierra"></img>'
 
     }
 
-    let spanImagenAtaqueJugador = document.getElementById("img-ataque-jugador")
+    console.log(ataqueJugador)
+    let spanImagenAtaqueJugador = document.getElementById(elem)
     let parrafo1 = document.createElement("div")
     parrafo1.innerHTML = imagenAtaqueJugador   
     spanImagenAtaqueJugador.appendChild(parrafo1)
@@ -384,24 +377,41 @@ function atacar(e) {
 
     //console.log(imagenAtaqueEnemigo)
 
-        if (ataqueJugador.length === 5) {
-            enviarAtaques()
-            
-            //crear variable obteniendo los datos de imagen y llamarlos en resultado del juego
-        }
     
     //ataqueAleatorioEnemigo()
     //boton.style.background = '#3D3837'
     
+}
+
+function atacarEvent(e) {
+    const boton = e.currentTarget
+    const ataque = boton.dataset.id;
+
+    let ataque_str = ''
+    if (ataque === 'boton-fuego') {
+        ataque_str = 'FIRE'
+    } else if(ataque === 'boton-agua') {
+        ataque_str = 'WATER'
+    } else {
+        ataque_str = 'GROUND'
+    }
+    ataqueJugador.push(ataque_str)
+    atacar(ataque_str, "img-ataque-jugador")
+    
+    if (ataqueJugador.length === 5) {
+        enviarAtaques()
+        
+        //crear variable obteniendo los datos de imagen y llamarlos en resultado del juego
+    }
     boton.disabled = true
     boton.removeEventListener('click', atacar)
 }
-    
+
 function secuenciaAtaque() {
     
 
     botones.forEach((boton) =>{
-        boton.addEventListener('click', atacar)
+        boton.addEventListener('click', atacarEvent)
     })  
 }
 
@@ -432,7 +442,9 @@ function obtenerAtaques() {
                         ataqueEnemigo = ataques
                         console.log(ataqueEnemigo)
                         
-                         
+                        ataqueEnemigo.map(ataque => {
+                            atacar(ataque, "img-ataque-enemigo")
+                        })
                         
                         pelea()
                         divResultado.style.display = "flex"
@@ -581,7 +593,20 @@ function mensajeFinal(resultadoFinal){
 }
 
 function reiniciarJuego(){
-    location.reload()
+    fetch(`http://localhost:8080/limpiar`, {
+        method: "get",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    })
+    .then(function(res) {
+        if(res.ok) {
+            console.log("Servidor limpio")
+            location.reload()
+            
+        }
+    })
+    
 }
 
 function aleatorio(min,max) {
@@ -664,7 +689,6 @@ function enviarPosicion(x, y) {
                         }
                         
                     })
-                    console.log( {mokeponesEnemigos} )
                     
                 })
             }

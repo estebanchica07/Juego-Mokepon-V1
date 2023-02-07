@@ -5,6 +5,7 @@ const cors = require("cors")
 
 //Creamos la aplicación Express
 const app = express()
+app.use(express.static('public'))
 app.use(cors())
 //Usar la librería
 app.use(express.json())
